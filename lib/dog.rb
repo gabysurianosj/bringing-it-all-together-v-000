@@ -14,7 +14,6 @@ class Dog
         breed TEXT
       )
       SQL
-
       DB[:conn].execute(sql)
   end
 
@@ -22,7 +21,6 @@ class Dog
     sql = <<-SQL
       DROP TABLE dogs
       SQL
-
     DB[:conn].execute(sql)
   end
 
@@ -30,7 +28,6 @@ class Dog
     sql = <<-SQL
       INSERT INTO dogs (name, breed) VALUES (?, ?)
       SQL
-
     DB[:conn].execute(sql, self.name, self.breed)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
 
@@ -48,7 +45,6 @@ class Dog
     sql = <<-SQL
       SELECT * FROM dogs WHERE id = ?
     SQL
-
     DB[:conn].execute(sql, id).map do |row|
       self.new_from_db(row)
     end.first
@@ -84,7 +80,6 @@ class Dog
     sql = <<-SQL
       SELECT * FROM dogs WHERE name = ?
     SQL
-
     DB[:conn].execute(sql, name).map do |row|
       self.new_from_db(row)
     end.first
@@ -94,8 +89,6 @@ class Dog
     sql = <<-SQL
       UPDATE dogs SET name = ?, breed = ? WHERE id = ?
       SQL
-
       DB[:conn].execute(sql, self.name, self.breed, self.id)
   end
-
 end

@@ -19,7 +19,7 @@ class Dog
   end 
   
   def self.drop_table 
-    sql = SQL 
+    sql = <<-SQL 
       DROP TABLE dogs 
       SQL 
       
@@ -27,5 +27,6 @@ class Dog
   end 
   
   def save 
-    sql = SQL 
-      INSERT INTO dogs 
+    sql = <<-SQL 
+      INSERT INTO dogs (name, breed) VALUES (?, ?)
+      
